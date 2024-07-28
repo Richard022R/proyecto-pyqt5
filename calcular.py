@@ -28,21 +28,21 @@ class COCOMOIWindow(QMainWindow):
 
     def calcular_fec(self):
         valores_niveles = {
-            "RSS": {"Muy baja": 0.75, "Baja": 0.88, "Nominal": 1, "Alto": 1.15, "Muy alto": 1.40},
-            "TDB": {"Muy baja": 1, "Baja": 0.94, "Nominal": 1, "Alto": 1.08, "Muy alto": 1.16},
-            "CPR": {"Muy baja": 0.70, "Baja": 0.85, "Nominal": 1, "Alto": 1.15, "Muy alto": 1.30, "Extra alto": 1.65},
-            "RTE": {"Nominal": 1, "Alto": 1.11, "Muy alto": 1.30, "Extra alto": 1.66},
-            "RMP": {"Muy baja": 1, "Baja": 1, "Nominal": 1, "Alto": 1.06, "Muy alto": 1.21, "Extra alto": 1.56},
-            "VMC": {"Baja": 0.87, "Nominal": 1, "Alto": 1.15, "Muy alto": 1.30},
-            "TRC": {"Nominal": 1, "Alto": 1.07, "Muy alto": 1.15},
-            "CAN": {"Muy baja": 1.46, "Baja": 1.19, "Nominal": 1, "Alto": 0.86, "Muy alto": 0.71},
-            "EAN": {"Muy baja": 1.29, "Baja": 1.13, "Nominal": 1, "Alto": 0.91, "Muy alto": 0.82},
-            "CPRO": {"Muy baja": 1.42, "Baja": 1.17, "Nominal": 1, "Alto": 0.86, "Muy alto": 0.70},
-            "ESO": {"Muy baja": 1.21, "Baja": 1.10, "Nominal": 1, "Alto": 0.90},
-            "ELP": {"Muy baja": 1.14, "Baja": 1.07, "Nominal": 1, "Alto": 0.95},
-            "UTP": {"Muy baja": 1.24, "Baja": 1.10, "Nominal": 1, "Alto": 0.91, "Muy alto": 0.82},
-            "UHC": {"Muy baja": 1.24, "Baja": 1.10, "Nominal": 1, "Alto": 0.91, "Muy alto": 0.83},
-            "RLP": {"Muy baja": 1.23, "Baja": 1.08, "Nominal": 1, "Alto": 1.04, "Muy alto": 1.10}
+            "RSS": {"Muy baja": 0.75, "Baja": 0.88, "Nominal": 1, "Alto ": 1.15, "Muy alto": 1.40},
+            "TDB": {"Muy baja": 1, "Baja": 0.94, "Nominal": 1, "Alto ": 1.08, "Muy alto": 1.16},
+            "CPR": {"Muy baja": 0.70, "Baja": 0.85, "Nominal": 1, "Alto ": 1.15, "Muy alto": 1.30, "Extra alto": 1.65},
+            "RTE": {"Nominal": 1, "Alto ": 1.11, "Muy alto": 1.30, "Extra alto": 1.66},
+            "RMP": {"Muy baja": 1, "Baja": 1, "Nominal": 1, "Alto ": 1.06, "Muy alto": 1.21, "Extra alto": 1.56},
+            "VMC": {"Baja": 0.87, "Nominal": 1, "Alto ": 1.15, "Muy alto": 1.30},
+            "TRC": {"Nominal": 1, "Alto ": 1.07, "Muy alto": 1.15},
+            "CAN": {"Muy baja": 1.46, "Baja": 1.19, "Nominal": 1, "Alto ": 0.86, "Muy alto": 0.71},
+            "EAN": {"Muy baja": 1.29, "Baja": 1.13, "Nominal": 1, "Alto ": 0.91, "Muy alto": 0.82},
+            "CPRO": {"Muy baja": 1.42, "Baja": 1.17, "Nominal": 1, "Alto ": 0.86, "Muy alto": 0.70},
+            "ESO": {"Muy baja": 1.21, "Baja": 1.10, "Nominal": 1, "Alto ": 0.90},
+            "ELP": {"Muy baja": 1.14, "Baja": 1.07, "Nominal": 1, "Alto ": 0.95},
+            "UTP": {"Muy baja": 1.24, "Baja": 1.10, "Nominal": 1, "Alto ": 0.91, "Muy alto": 0.82},
+            "UHC": {"Muy baja": 1.24, "Baja": 1.10, "Nominal": 1, "Alto ": 0.91, "Muy alto": 0.83},
+            "RLP": {"Muy baja": 1.23, "Baja": 1.08, "Nominal": 1, "Alto ": 1.04, "Muy alto": 1.10}
         }
 
         fec = 1

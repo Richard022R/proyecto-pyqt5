@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\manue\OneDrive\Desktop\proyecto-pyqt5\cocomop.ui'
+# Form implementation generated from reading ui file 'd:\cocomo\proyecto-pyqt5\cocomop.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -472,6 +472,12 @@ class Ui_Form(object):
         font.setPointSize(10)
         self.label_23.setFont(font)
         self.label_23.setObjectName("label_23")
+        self.label_24 = QtWidgets.QLabel(Form)
+        self.label_24.setGeometry(QtCore.QRect(590, 580, 61, 61))
+        self.label_24.setText("")
+        self.label_24.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\info.png"))
+        self.label_24.setScaledContents(True)
+        self.label_24.setObjectName("label_24")
 
         self.retranslateUi(Form)
         self.comboBox_2.setCurrentIndex(2)

@@ -3,6 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from calcular import COCOMOIWindow
+from puntosf import Pantallaf
 
 class Pantalla(QMainWindow):
     def __init__(self):
@@ -36,8 +37,9 @@ class Pantalla(QMainWindow):
         # Aquí puedes añadir la funcionalidad para Info
 
     def puntosf_clicked(self):
-        print("Puntos de función button clicked")
-        # Aquí puedes añadir la funcionalidad para Puntos de función
+        self.pantalla_f = Pantallaf()
+        self.pantalla_f.show()
+        self.close()  # Cerrar la ventana principal
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

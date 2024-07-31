@@ -24,9 +24,9 @@ class Pantalla(QMainWindow):
         self.pushButton_3.clicked.connect(self.puntosf_clicked)
 
     def cocomo_i_clicked(self):
-        self.cocomop_i_window = COCOMOIWindow()
+        self.cocomop_i_window = COCOMOIWindow(self)
         self.cocomop_i_window.show()
-        self.close()  # Cerrar la ventana principal
+        self.hide()  # Cerrar la ventana principal
 
     def cocomo_ii_clicked(self):
         print("COCOMO II button clicked")
@@ -37,9 +37,9 @@ class Pantalla(QMainWindow):
         # Aquí puedes añadir la funcionalidad para Info
 
     def puntosf_clicked(self):
-        self.pantalla_f = Pantallaf()
+        self.pantalla_f = Pantallaf(self)
         self.pantalla_f.show()
-        self.close()  # Cerrar la ventana principal
+        self.hide()  # Cerrar la ventana principal
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -21,8 +21,9 @@ class ClickableLabel(QLabel):
         super().mousePressEvent(event)
 
 class COCOMOIWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, main_window=None):
         super(COCOMOIWindow, self).__init__()
+        self.main_window = main_window
         uic.loadUi('cocomop.ui', self)
 
         # Reemplazar el QLabel con la clase ClickableLabel
@@ -40,6 +41,9 @@ class COCOMOIWindow(QMainWindow):
 
         # Conectar el botón de cálculo a su función
         self.pushButton.clicked.connect(self.calcular)
+        self.label_25.setCursor(Qt.PointingHandCursor)
+        self.label_25.mousePressEvent = self.regresar
+        
 
         # Inicializar los comboboxes de factores
         self.fec_combos = [
@@ -110,6 +114,11 @@ class COCOMOIWindow(QMainWindow):
     def show_info(self):
         self.info_window = COCOMOIinfo(esfuerzo, tipo_proyecto, kldc, fec, tiempo, cpm)
         self.info_window.show()
+
+    def regresar(self, event):
+        if self.main_window:
+            self.main_window.show()  # Muestra la ventana principal si existe
+        self.close()
 
     
 class COCOMOIinfo(QMainWindow):

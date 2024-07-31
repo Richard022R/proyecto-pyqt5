@@ -2,10 +2,12 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSpinBox, QLabel
+from calcular import COCOMOIWindow
 
 class Pantallaf(QMainWindow):
-    def __init__(self):
+    def __init__(self, main_window):
         super(Pantallaf, self).__init__()
+        self.main_window = main_window
         uic.loadUi('puntos.ui', self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
 
@@ -18,6 +20,10 @@ class Pantallaf(QMainWindow):
         self.radioButton.toggled.connect(self.activar)
         self.radioButton_2.toggled.connect(self.activar)
         self.pushButton.clicked.connect(self.calcular)
+        self.label_25.setCursor(Qt.PointingHandCursor)
+        self.label_25.mousePressEvent = self.regresar
+        self.label_26.setCursor(Qt.PointingHandCursor)
+        self.label_26.mousePressEvent = self.calcularcocomo
 
         self.tabla()
         self.activar()
@@ -71,7 +77,20 @@ class Pantallaf(QMainWindow):
             factor = float(self.textEdit_2.toPlainText() or 1)
         
         resultado = total * factor
-        self.label_24.setText(f"{resultado:.2f}")
+        self.label_24.setText(f"{resultado:.2f}")   
+
+    def calcularcocomo(self, event):
+        kldc = float(self.label_24.text()) / 1000  # Dividir el resultado por 1000
+        self.cocomo_window = COCOMOIWindow()
+        self.cocomo_window.lineEdit_2.setText(str(kldc))  # Establece el valor de KLDC
+        self.cocomo_window.show()
+        self.hide()  # Oculta la ventana actual
+
+    def regresar(self, event):
+        self.main_window.show()  # Muestra la ventana principal
+        self.close()
+
+    
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

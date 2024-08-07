@@ -24,7 +24,7 @@ class COCOMOIWindow(QMainWindow):
     def __init__(self, main_window=None):
         super(COCOMOIWindow, self).__init__()
         self.main_window = main_window
-        uic.loadUi('cocomop.ui', self)
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/cocomop.ui', self)
 
         # Reemplazar el QLabel con la clase ClickableLabel
         self.label_info = self.findChild(ClickableLabel, 'label_24')
@@ -124,7 +124,7 @@ class COCOMOIWindow(QMainWindow):
 class COCOMOIinfo(QMainWindow):
     def __init__(self, esfuerzo=None, tipo_proyecto=None, kldc=None, fec=None, tiempo=None, cpm=None, parent=None):
         super(COCOMOIinfo, self).__init__()
-        uic.loadUi('ecuaciones.ui', self)
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/ecuaciones.ui', self)
 
         self.resize(734, 684)
 

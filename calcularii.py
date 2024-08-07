@@ -1,13 +1,43 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
+
+esfuerzo = None
+kldc = None
+fec = None
+tiempo = None
+cpm = None
+fac_escala = None
+
+class ClickableLabel(QLabel):   
+    clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(ClickableLabel, self).__init__(parent)
+
+    def mousePressEvent(self, event):
+        self.clicked.emit()
+        super().mousePressEvent(event)
 
 class Calcularw(QMainWindow):
     def __init__(self, main_window=None):
         super().__init__()
         self.main_window = main_window
-        uic.loadUi('cocopost.ui', self)
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/cocopost.ui', self)
+
+        # Reemplazar el QLabel con la clase ClickableLabel
+        self.label_info = self.findChild(ClickableLabel, 'label_4')
+        if self.label_info is None:
+            self.label_info = ClickableLabel(self)
+            self.label_info.setObjectName('label_4')
+            self.label_info.setGeometry(590, 580, 61, 61)
+            #self.label_info.setPixmap(self.style().standardPixmap(self.style().SP_MessageBoxInformation))  # Puedes ajustar la imagen
+            #self.label_info.setScaledContents(True)
+            self.label_info.clicked.connect(self.show_info)
+        else:
+            #self.label_info.setPixmap(self.label_info.pixmap())
+            self.label_info.clicked.connect(self.show_info)
 
         self.pushButton.clicked.connect(self.calcular)
         self.label_25.setCursor(Qt.PointingHandCursor)
@@ -68,6 +98,7 @@ class Calcularw(QMainWindow):
         return resultado
 
     def calcular(self):
+        global esfuerzo, kldc, fec, tiempo, cpm, fac_escala
         try:
             kldc = float(self.lineEdit_2.text())
             cpm = float(self.lineEdit.text())
@@ -78,6 +109,10 @@ class Calcularw(QMainWindow):
             esfuerzo = 2.94 * fec * (kldc ** (0.91 + (fac_escala/100)))
             tiempo = 3.67 * esfuerzo ** 0.33
             costo = esfuerzo * cpm
+
+            print('esfuerzo: ',esfuerzo)
+            print('tiempo: ',tiempo)
+            print('costo: ',costo)
 
             self.label_21.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#00007f;\">Esfuerzo estimado: <span style=\" color:#ff0000;\">{esfuerzo:.2f} personas-mes</span></span></p></body></html>")
             self.label_22.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#00007f;\">Tiempo estimado de desarrollo: <span style=\" color:#ff0000;\">{tiempo:.2f} meses</span></span></p></body></html>")
@@ -90,6 +125,45 @@ class Calcularw(QMainWindow):
         if self.main_window:
             self.main_window.show()
         self.close()
+        
+    def show_info(self):
+        self.info_window = COCOMOIIinfo(esfuerzo, kldc, fec, tiempo, cpm, fac_escala)
+        self.info_window.show()
+
+class COCOMOIIinfo(QMainWindow):
+    def __init__(self, esfuerzo=None, kldc=None, fec=None, tiempo=None, cpm=None, fac_escala=None, parent=None):
+        super(COCOMOIIinfo, self).__init__()
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/ecuaciones_cocomo_ii.ui', self)
+
+        self.resize(734, 684)
+
+        if esfuerzo is not None:
+            print('Esfuerzo: ', esfuerzo)
+            self.show_esfuerzo(esfuerzo, kldc, fec, fac_escala)
+        if tiempo is not None:
+            print('Tiempo: ', tiempo)
+            self.show_tiempo(tiempo, esfuerzo)
+        if cpm is not None:
+            print('CPM: ', cpm)
+            self.show_costo(esfuerzo, cpm)
+
+    def show_esfuerzo(self, esfuerzo, kldc, fec, fac_escala):
+        # Asume que tienes un QLabel con el nombre 'label_esfuerzo' en ecuaciones.ui
+        self.label_7.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">ESF = 2.94 * FEC * (KLDC) ^ (0.91 + ΣSFi/100)</span></p></body></html>")
+        self.label_10.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">ESF = 2.94 * ({fec:.2f}) * ({kldc:.2f}) ^ (0.91 + {fac_escala:.2f}/100)</span></p></body></html>")
+        self.label_11.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">ESF = {fec*2.94:.2} * ({kldc:.2f}) ^ ({(fac_escala/100)+0.91:.2f})</span></p></body></html>")
+        self.label_12.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">ESF = {esfuerzo:.2f}</span></p></body></html>")
+
+    def show_tiempo(self, tiempo, esfuerzo):
+        self.label_8.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">TDES = 3.67 * (ESF) ^ (0.28 + (0.2 * ΣSFi/100))</span></p></body></html>")
+        self.label_14.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">TDES = 3.67 * ({esfuerzo:.2f}) ^ (0.28 + (0.2 * {fac_escala:.2f}/100))</span></p></body></html>")
+        self.label_15.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">TDES = 3.67 * ({esfuerzo:.2f}) ^ ({((fac_escala/100)*0.2)+0.28:.2f})</span></p></body></html>")
+        self.label_16.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">TDES = {tiempo:.2f}</span></p></body></html>")
+
+    def show_costo(self, esfuerzo, cpm):
+        self.label_9.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">C = ESF * CPM</span></p></body></html>")
+        self.label_17.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">C = {esfuerzo:.2f} ^ {cpm:.2f}</span></p></body></html>")
+        self.label_18.setText(f"<html><head/><body><p><span style=\" font-weight:600; color:#000000;\">C = {esfuerzo * cpm:.2f}</span></p></body></html>")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

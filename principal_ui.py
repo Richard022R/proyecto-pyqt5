@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\manue\OneDrive\Desktop\proyecto-pyqt5\principal.ui'
+# Form implementation generated from reading ui file 'd:\cocomo\proyecto-pyqt5\principal.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_1 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_1.setGeometry(QtCore.QRect(580, 280, 151, 51))
+        self.pushButton_1.setGeometry(QtCore.QRect(560, 280, 221, 51))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -60,19 +60,19 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(60, 130, 151, 141))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("c:\\Users\\manue\\OneDrive\\Desktop\\proyecto-pyqt5\\c1.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\c1.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(320, 140, 161, 131))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("c:\\Users\\manue\\OneDrive\\Desktop\\proyecto-pyqt5\\c2.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\c2.png"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(580, 140, 151, 131))
+        self.label_4.setGeometry(QtCore.QRect(610, 140, 131, 121))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("c:\\Users\\manue\\OneDrive\\Desktop\\proyecto-pyqt5\\c3.png"))
+        self.label_4.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\c4.png"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -89,5 +89,5 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "INFO"))
         self.label.setText(_translate("MainWindow", "BIENVENIDO A MI CODIGO DE ESTIMACIÓN"))
         self.pushButton.setText(_translate("MainWindow", "COCOMO I"))
-        self.pushButton_1.setText(_translate("MainWindow", "COCOMO II"))
-        self.pushButton_3.setText(_translate("MainWindow", "PUNTOS DE FUNCIÓN"))
+        self.pushButton_1.setText(_translate("MainWindow", "PUNTOS DE CASO DE USO"))
+        self.pushButton_3.setText(_translate("MainWindow", "COCOMO II"))

@@ -77,9 +77,9 @@
    <widget class="QPushButton" name="pushButton_1">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>560</x>
       <y>280</y>
-      <width>151</width>
+      <width>221</width>
       <height>51</height>
      </rect>
     </property>
@@ -91,7 +91,7 @@
      </font>
     </property>
     <property name="text">
-     <string>COCOMO II</string>
+     <string>PUNTOS DE CASO DE USO</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -111,7 +111,7 @@
      </font>
     </property>
     <property name="text">
-     <string>PUNTOS DE FUNCIÓN</string>
+     <string>COCOMO II</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -155,17 +155,17 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>610</x>
       <y>140</y>
-      <width>151</width>
-      <height>131</height>
+      <width>131</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>c3.png</pixmap>
+     <pixmap>c4.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

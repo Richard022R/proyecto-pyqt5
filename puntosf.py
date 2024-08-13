@@ -1,14 +1,29 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSpinBox, QLabel
-from calcular import COCOMOIWindow
+
+lineas_codigo = None
+
+class ClickableLabel(QLabel):
+    clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(ClickableLabel, self).__init__(parent)
+
+    def mousePressEvent(self, event):
+        print("label_24 clicked!")
+        self.clicked.emit()
+        super().mousePressEvent(event)
 
 class Pantallaf(QMainWindow):
-    def __init__(self, main_window):
+    
+    closed = pyqtSignal()  # Señal emitida cuando se cierra la ventana
+
+    def __init__(self, main_window = None):
         super(Pantallaf, self).__init__()
         self.main_window = main_window
-        uic.loadUi('puntos.ui', self)
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/puntos.ui', self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
 
         # Connect signals
@@ -17,13 +32,24 @@ class Pantallaf(QMainWindow):
             spinbox = getattr(self, f'spinBox_{i}')
             spinbox.valueChanged.connect(self.tabla)
 
+        # Reemplazar el QLabel con la clase ClickableLabel
+        self.label_guardar = self.findChild(ClickableLabel, 'label_26')
+        if self.label_guardar is None:
+            self.label_guardar = ClickableLabel(self)
+            self.label_guardar.setObjectName('label_26')
+            self.label_guardar.setGeometry(550, 410, 161, 151)
+            self.label_guardar.clicked.connect(self.show_cocomo)
+        else:
+            #self.label_info.setPixmap(self.label_info.pixmap())
+            self.label_guardar.clicked.connect(self.show_cocomo)
+
         self.radioButton.toggled.connect(self.activar)
         self.radioButton_2.toggled.connect(self.activar)
         self.pushButton.clicked.connect(self.calcular)
         self.label_25.setCursor(Qt.PointingHandCursor)
         self.label_25.mousePressEvent = self.regresar
-        self.label_26.setCursor(Qt.PointingHandCursor)
-        self.label_26.mousePressEvent = self.calcularcocomo
+        #self.label_26.setCursor(Qt.PointingHandCursor)
+        #self.label_26.mousePressEvent = self.calcularcocomo
 
         self.tabla()
         self.activar()
@@ -69,6 +95,7 @@ class Pantallaf(QMainWindow):
             self.textEdit_2.setEnabled(True)
 
     def calcular(self):
+        global lineas_codigo
         total = float(self.label_19.text())
         if self.radioButton.isChecked():
             lenguaje = self.comboBox.currentText()
@@ -77,17 +104,33 @@ class Pantallaf(QMainWindow):
             factor = float(self.textEdit_2.toPlainText() or 1)
         
         resultado = total * factor
-        self.label_24.setText(f"{resultado:.2f}")   
+        lineas_codigo = resultado
+        self.label_24.setText(f"{resultado:.2f}")  
+        return resultado
 
     def calcularcocomo(self, event):
         kldc = float(self.label_24.text()) / 1000  # Dividir el resultado por 1000
-        self.cocomo_window = COCOMOIWindow()
+        #self.cocomo_window = COCOMOIWindow()
         self.cocomo_window.lineEdit_2.setText(str(kldc))  # Establece el valor de KLDC
         self.cocomo_window.show()
         self.hide()  # Oculta la ventana actual
+        return 
+
+    def show_cocomo(self):
+        global lineas_codigo
+        ldc = lineas_codigo
+        with open('cpm.txt', 'w') as archivo:
+            archivo.write(str(ldc))
+        self.close()
+    
+    def closeEvent(self, event):
+        self.closed.emit()  # Emitir la señal al cerrar la ventana
+        event.accept()  # Aceptar el evento de cierre
 
     def regresar(self, event):
-        self.main_window.show()  # Muestra la ventana principal
+        #self.main_window.show()  # Muestra la ventana principal
+        with open('cpm.txt', 'w') as archivo:
+            archivo.write("0")
         self.close()
 
     

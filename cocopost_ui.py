@@ -638,6 +638,12 @@ class Ui_Form(object):
         self.label_4.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\info.png"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
+        self.label_33 = QtWidgets.QLabel(Form)
+        self.label_33.setGeometry(QtCore.QRect(660, 20, 91, 81))
+        self.label_33.setText("")
+        self.label_33.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\c3.png"))
+        self.label_33.setScaledContents(True)
+        self.label_33.setObjectName("label_33")
 
         self.retranslateUi(Form)
         self.comboBox_2.setCurrentIndex(2)

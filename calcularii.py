@@ -2,6 +2,7 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
+from puntosf import Pantallaf
 
 esfuerzo = None
 kldc = None
@@ -9,6 +10,7 @@ fec = None
 tiempo = None
 cpm = None
 fac_escala = None
+contenido_global = None
 
 class ClickableLabel(QLabel):   
     clicked = pyqtSignal()
@@ -18,6 +20,18 @@ class ClickableLabel(QLabel):
 
     def mousePressEvent(self, event):
         self.clicked.emit()
+        super().mousePressEvent(event)
+
+class ClickableLabel2(QLabel):
+    clicked2 = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(ClickableLabel2, self).__init__(parent)
+
+    def mousePressEvent(self, event):  # Asegúrate de que el método se llame mousePressEvent
+        print("label_26 clicked!")  # Depura si se detecta el clic
+        self.clicked2.emit()
+        print("clicked2 signal emitted")
         super().mousePressEvent(event)
 
 class Calcularw(QMainWindow):
@@ -31,13 +45,27 @@ class Calcularw(QMainWindow):
         if self.label_info is None:
             self.label_info = ClickableLabel(self)
             self.label_info.setObjectName('label_4')
-            self.label_info.setGeometry(590, 580, 61, 61)
+            self.label_info.setGeometry(570, 660, 71, 61)
             #self.label_info.setPixmap(self.style().standardPixmap(self.style().SP_MessageBoxInformation))  # Puedes ajustar la imagen
             #self.label_info.setScaledContents(True)
             self.label_info.clicked.connect(self.show_info)
         else:
             #self.label_info.setPixmap(self.label_info.pixmap())
             self.label_info.clicked.connect(self.show_info)
+
+        # Reemplazar el QLabel con la clase ClickableLabel
+        self.label_puntosfuncion = self.findChild(ClickableLabel2, 'label_33')
+        
+        if self.label_puntosfuncion is None:
+            self.label_puntosfuncion = ClickableLabel2(self)
+            self.label_puntosfuncion.setObjectName('label_33')
+            self.label_puntosfuncion.setGeometry(660, 20, 91, 81)
+            self.label_puntosfuncion.clicked2.connect(self.show_info2)
+        else:
+            self.label_puntosfuncion.clicked2.connect(self.show_info2)
+
+        print('puntos de funcion: ',type(self.label_puntosfuncion))
+        print('ecuaciones: ',type(self.label_info))
 
         self.pushButton.clicked.connect(self.calcular)
         self.label_25.setCursor(Qt.PointingHandCursor)
@@ -129,6 +157,28 @@ class Calcularw(QMainWindow):
     def show_info(self):
         self.info_window = COCOMOIIinfo(esfuerzo, kldc, fec, tiempo, cpm, fac_escala)
         self.info_window.show()
+    
+    def show_info2(self):
+        global contenido_global
+        self.pantalla_puntosf = Pantallaf()
+        self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        self.pantalla_puntosf.show()
+        with open('cpm.txt', 'r') as archivo:
+            contenido = archivo.read()
+            print('contenido: ', contenido)
+        contenido_global = contenido
+        self.lineEdit.setText(contenido)
+
+    def actualizar_lineEdit_contenido(self):
+        try:
+            with open('cpm.txt', 'r') as archivo:
+                contenido = archivo.read()
+                print('Contenido leído: ', contenido)
+            self.lineEdit.setText(contenido)
+        except FileNotFoundError:
+            QMessageBox.warning(self, "Error", "No se encontró el archivo cpm.txt.")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Ocurrió un error al leer el archivo: {e}")
 
 class COCOMOIIinfo(QMainWindow):
     def __init__(self, esfuerzo=None, kldc=None, fec=None, tiempo=None, cpm=None, fac_escala=None, parent=None):

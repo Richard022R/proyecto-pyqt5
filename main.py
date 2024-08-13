@@ -8,7 +8,7 @@ from puntosf import Pantallaf
 class Pantalla(QMainWindow):
     def __init__(self):
         super(Pantalla, self).__init__()
-        uic.loadUi('principal.ui', self)
+        uic.loadUi('D:/cocomo/proyecto-pyqt5/principal.ui', self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
         
         # Desactivar el enfoque de los botones

@@ -2,6 +2,7 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
+from puntosf import Pantallaf
 
 esfuerzo = None
 tipo_proyecto = None
@@ -9,6 +10,8 @@ kldc = None
 fec = None
 tiempo = None
 cpm = None
+ldc = None
+contenido_global = None
 
 class ClickableLabel(QLabel):
     clicked = pyqtSignal()
@@ -17,7 +20,20 @@ class ClickableLabel(QLabel):
         super(ClickableLabel, self).__init__(parent)
 
     def mousePressEvent(self, event):
+        print("label_24 clicked!")
         self.clicked.emit()
+        super().mousePressEvent(event)
+
+class ClickableLabel2(QLabel):
+    clicked2 = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(ClickableLabel2, self).__init__(parent)
+
+    def mousePressEvent(self, event):  # Asegúrate de que el método se llame mousePressEvent
+        print("label_26 clicked!")  # Depura si se detecta el clic
+        self.clicked2.emit()
+        print("clicked2 signal emitted")
         super().mousePressEvent(event)
 
 class COCOMOIWindow(QMainWindow):
@@ -27,23 +43,34 @@ class COCOMOIWindow(QMainWindow):
         uic.loadUi('D:/cocomo/proyecto-pyqt5/cocomop.ui', self)
 
         # Reemplazar el QLabel con la clase ClickableLabel
-        self.label_info = self.findChild(ClickableLabel, 'label_24')
-        if self.label_info is None:
-            self.label_info = ClickableLabel(self)
-            self.label_info.setObjectName('label_24')
-            self.label_info.setGeometry(590, 580, 61, 61)
-            #self.label_info.setPixmap(self.style().standardPixmap(self.style().SP_MessageBoxInformation))  # Puedes ajustar la imagen
-            #self.label_info.setScaledContents(True)
-            self.label_info.clicked.connect(self.show_info)
+        self.label_c3 = self.findChild(ClickableLabel, 'label_24')
+        if self.label_c3 is None:
+            self.label_c3 = ClickableLabel(self)
+            self.label_c3.setObjectName('label_24')
+            self.label_c3.setGeometry(590, 580, 61, 61)
+            self.label_c3.clicked.connect(self.show_info)
         else:
             #self.label_info.setPixmap(self.label_info.pixmap())
-            self.label_info.clicked.connect(self.show_info)
+            self.label_c3.clicked.connect(self.show_info)
+
+        # Reemplazar el QLabel con la clase ClickableLabel
+        self.label_puntosfuncion = self.findChild(ClickableLabel2, 'label_26')
+        
+        if self.label_puntosfuncion is None:
+            self.label_puntosfuncion = ClickableLabel2(self)
+            self.label_puntosfuncion.setObjectName('label_26')
+            self.label_puntosfuncion.setGeometry(600, 10, 91, 81)
+            self.label_puntosfuncion.clicked2.connect(self.show_info2)
+        else:
+            self.label_puntosfuncion.clicked2.connect(self.show_info2)
+
+        print('puntos de funcion: ',type(self.label_puntosfuncion))
+        print('ecuaciones: ',type(self.label_c3))
 
         # Conectar el botón de cálculo a su función
         self.pushButton.clicked.connect(self.calcular)
         self.label_25.setCursor(Qt.PointingHandCursor)
         self.label_25.mousePressEvent = self.regresar
-        
 
         # Inicializar los comboboxes de factores
         self.fec_combos = [
@@ -87,7 +114,7 @@ class COCOMOIWindow(QMainWindow):
         return fec
 
     def calcular(self):
-        global esfuerzo, tipo_proyecto, kldc, fec, tiempo, cpm
+        global esfuerzo, tipo_proyecto, kldc, fec, tiempo, cpm, contenido_global
         try:
             kldc = float(self.lineEdit_2.text())
             cpm = float(self.lineEdit.text())
@@ -115,11 +142,32 @@ class COCOMOIWindow(QMainWindow):
         self.info_window = COCOMOIinfo(esfuerzo, tipo_proyecto, kldc, fec, tiempo, cpm)
         self.info_window.show()
 
+    def show_info2(self):
+        global contenido_global
+        self.pantalla_puntosf = Pantallaf()
+        self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        self.pantalla_puntosf.show()
+        with open('cpm.txt', 'r') as archivo:
+            contenido = archivo.read()
+            print('contenido: ', contenido)
+        contenido_global = contenido
+        self.lineEdit.setText(contenido)
+
     def regresar(self, event):
         if self.main_window:
             self.main_window.show()  # Muestra la ventana principal si existe
         self.close()
 
+    def actualizar_lineEdit_contenido(self):
+        try:
+            with open('cpm.txt', 'r') as archivo:
+                contenido = archivo.read()
+                print('Contenido leído: ', contenido)
+            self.lineEdit.setText(contenido)
+        except FileNotFoundError:
+            QMessageBox.warning(self, "Error", "No se encontró el archivo cpm.txt.")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Ocurrió un error al leer el archivo: {e}")
     
 class COCOMOIinfo(QMainWindow):
     def __init__(self, esfuerzo=None, tipo_proyecto=None, kldc=None, fec=None, tiempo=None, cpm=None, parent=None):

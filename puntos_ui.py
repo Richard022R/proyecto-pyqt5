@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\manue\Desktop\proyecto-pyqt5\puntos.ui'
+# Form implementation generated from reading ui file 'd:\cocomo\proyecto-pyqt5\puntos.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -26,7 +26,7 @@ class Ui_Form(object):
         self.label_6 = QtWidgets.QLabel(Form)
         self.label_6.setGeometry(QtCore.QRect(20, 70, 901, 381))
         self.label_6.setText("")
-        self.label_6.setPixmap(QtGui.QPixmap("c:\\Users\\manue\\Desktop\\proyecto-pyqt5\\tabla.png"))
+        self.label_6.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\tabla.png"))
         self.label_6.setScaledContents(True)
         self.label_6.setObjectName("label_6")
         self.label_2 = QtWidgets.QLabel(Form)
@@ -197,7 +197,7 @@ class Ui_Form(object):
         self.label_18.setFont(font)
         self.label_18.setObjectName("label_18")
         self.label_19 = QtWidgets.QLabel(Form)
-        self.label_19.setGeometry(QtCore.QRect(410, 450, 101, 21))
+        self.label_19.setGeometry(QtCore.QRect(370, 450, 101, 21))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.label_19.setFont(font)
@@ -229,7 +229,7 @@ class Ui_Form(object):
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
         self.comboBox = QtWidgets.QComboBox(Form)
-        self.comboBox.setGeometry(QtCore.QRect(120, 590, 161, 22))
+        self.comboBox.setGeometry(QtCore.QRect(120, 570, 161, 22))
         self.comboBox.setEditable(True)
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
@@ -284,7 +284,7 @@ class Ui_Form(object):
         self.textEdit_2.setGeometry(QtCore.QRect(550, 680, 241, 31))
         self.textEdit_2.setObjectName("textEdit_2")
         self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(40, 720, 111, 31))
+        self.pushButton.setGeometry(QtCore.QRect(30, 600, 111, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -292,7 +292,7 @@ class Ui_Form(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.label_23 = QtWidgets.QLabel(Form)
-        self.label_23.setGeometry(QtCore.QRect(50, 770, 301, 21))
+        self.label_23.setGeometry(QtCore.QRect(200, 610, 301, 21))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -300,12 +300,24 @@ class Ui_Form(object):
         self.label_23.setFont(font)
         self.label_23.setObjectName("label_23")
         self.label_24 = QtWidgets.QLabel(Form)
-        self.label_24.setGeometry(QtCore.QRect(320, 770, 121, 16))
+        self.label_24.setGeometry(QtCore.QRect(390, 610, 121, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_24.setFont(font)
         self.label_24.setText("")
         self.label_24.setObjectName("label_24")
+        self.label_25 = QtWidgets.QLabel(Form)
+        self.label_25.setGeometry(QtCore.QRect(40, 20, 55, 41))
+        self.label_25.setText("")
+        self.label_25.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\back.png"))
+        self.label_25.setScaledContents(True)
+        self.label_25.setObjectName("label_25")
+        self.label_26 = QtWidgets.QLabel(Form)
+        self.label_26.setGeometry(QtCore.QRect(550, 410, 161, 151))
+        self.label_26.setText("")
+        self.label_26.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\guardar.png"))
+        self.label_26.setScaledContents(True)
+        self.label_26.setObjectName("label_26")
 
         self.retranslateUi(Form)
         self.comboBox.setCurrentIndex(0)
@@ -362,13 +374,13 @@ class Ui_Form(object):
         self.textEdit.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>"))
         self.label_22.setText(_translate("Form", "Conversión de LDC/PF"))
         self.textEdit_2.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>"))
         self.pushButton.setText(_translate("Form", "CALCULAR"))
         self.label_23.setText(_translate("Form", "<html><head/><body><p><span style=\" font-style:italic; color:#005500;\">LAS LINEAS DE CODIGO SON:</span></p></body></html>"))

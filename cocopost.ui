@@ -59,7 +59,7 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>370</x>
      <y>40</y>
      <width>161</width>
      <height>31</height>
@@ -89,7 +89,7 @@
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>360</x>
      <y>80</y>
      <width>161</width>
      <height>22</height>
@@ -1575,7 +1575,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../back.png</pixmap>
+    <pixmap>back.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -2014,6 +2014,25 @@
    </property>
    <property name="pixmap">
     <pixmap>c3.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_34">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>20</y>
+     <width>91</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>cpm.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

@@ -1,10 +1,10 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from calcular import COCOMOIWindow
 from calcularii import Calcularw
-from puntosf import Pantallaf
+from puntos_caso_uso import UCPCalculator
 
 class Pantalla(QMainWindow):
     def __init__(self):
@@ -31,6 +31,10 @@ class Pantalla(QMainWindow):
 
     def cocomo_ii_clicked(self):
         print("COCOMO II button clicked")
+        self.puntos_caso_de_uso = UCPCalculator(self)
+        self.puntos_caso_de_uso.switch_to_main.connect(self.show)  # Conectar la señal a la función show de Pantalla
+        self.puntos_caso_de_uso.show()
+        self.hide()
         # Aquí puedes añadir la funcionalidad para COCOMO II
 
     def info_clicked(self):

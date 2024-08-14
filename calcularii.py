@@ -3,6 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
 from puntosf import Pantallaf
+from etapas import PantallaEtapas
 
 esfuerzo = None
 kldc = None
@@ -34,6 +35,18 @@ class ClickableLabel2(QLabel):
         print("clicked2 signal emitted")
         super().mousePressEvent(event)
 
+class ClickableLabel3(QLabel):
+    clicked3 = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super(ClickableLabel3, self).__init__(parent)
+
+    def mousePressEvent(self, event):  # Asegúrate de que el método se llame mousePressEvent
+        print("label_26 clicked!")  # Depura si se detecta el clic
+        self.clicked3.emit()
+        print("clicked3 signal emitted")
+        super().mousePressEvent(event)
+
 class Calcularw(QMainWindow):
     def __init__(self, main_window=None):
         super().__init__()
@@ -63,6 +76,17 @@ class Calcularw(QMainWindow):
             self.label_puntosfuncion.clicked2.connect(self.show_info2)
         else:
             self.label_puntosfuncion.clicked2.connect(self.show_info2)
+        
+        # Reemplazar el QLabel con la clase ClickableLabel
+        self.label_etapas = self.findChild(ClickableLabel3, 'label_34')
+        
+        if self.label_etapas is None:
+            self.label_etapas = ClickableLabel3(self)
+            self.label_etapas.setObjectName('label_34')
+            self.label_etapas.setGeometry(560, 20, 91, 81)
+            self.label_etapas.clicked3.connect(self.show_info3)
+        else:
+            self.label_puntosfuncion.clicked3.connect(self.show_info3)
 
         print('puntos de funcion: ',type(self.label_puntosfuncion))
         print('ecuaciones: ',type(self.label_info))
@@ -163,6 +187,17 @@ class Calcularw(QMainWindow):
         self.pantalla_puntosf = Pantallaf()
         self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
         self.pantalla_puntosf.show()
+        with open('kldc.txt', 'r') as archivo:
+            contenido = archivo.read()
+            print('contenido: ', contenido)
+        contenido_global = contenido
+        self.lineEdit_2.setText(contenido)
+    
+    def show_info3(self):
+        global contenido_global
+        self.pantalla_etapas = PantallaEtapas()
+        self.pantalla_etapas.closed.connect(self.actualizar_lineEdit_contenido2)
+        self.pantalla_etapas.show()
         with open('cpm.txt', 'r') as archivo:
             contenido = archivo.read()
             print('contenido: ', contenido)
@@ -170,6 +205,17 @@ class Calcularw(QMainWindow):
         self.lineEdit.setText(contenido)
 
     def actualizar_lineEdit_contenido(self):
+        try:
+            with open('kldc.txt', 'r') as archivo:
+                contenido = archivo.read()
+                print('Contenido leído: ', contenido)
+            self.lineEdit_2.setText(contenido)
+        except FileNotFoundError:
+            QMessageBox.warning(self, "Error", "No se encontró el archivo kldc.txt.")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Ocurrió un error al leer el archivo: {e}")
+    
+    def actualizar_lineEdit_contenido2(self):
         try:
             with open('cpm.txt', 'r') as archivo:
                 contenido = archivo.read()

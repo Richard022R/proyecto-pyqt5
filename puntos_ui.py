@@ -313,7 +313,7 @@ class Ui_Form(object):
         self.label_25.setScaledContents(True)
         self.label_25.setObjectName("label_25")
         self.label_26 = QtWidgets.QLabel(Form)
-        self.label_26.setGeometry(QtCore.QRect(550, 410, 161, 151))
+        self.label_26.setGeometry(QtCore.QRect(490, 440, 161, 81))
         self.label_26.setText("")
         self.label_26.setPixmap(QtGui.QPixmap("d:\\cocomo\\proyecto-pyqt5\\guardar.png"))
         self.label_26.setScaledContents(True)

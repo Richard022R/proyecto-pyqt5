@@ -37,7 +37,7 @@ class Pantallaf(QMainWindow):
         if self.label_guardar is None:
             self.label_guardar = ClickableLabel(self)
             self.label_guardar.setObjectName('label_26')
-            self.label_guardar.setGeometry(550, 410, 161, 151)
+            self.label_guardar.setGeometry(490, 440, 161, 81)
             self.label_guardar.clicked.connect(self.show_cocomo)
         else:
             #self.label_info.setPixmap(self.label_info.pixmap())
@@ -119,7 +119,7 @@ class Pantallaf(QMainWindow):
     def show_cocomo(self):
         global lineas_codigo
         ldc = lineas_codigo
-        with open('cpm.txt', 'w') as archivo:
+        with open('kldc.txt', 'w') as archivo:
             archivo.write(str(ldc))
         self.close()
     
@@ -129,11 +129,9 @@ class Pantallaf(QMainWindow):
 
     def regresar(self, event):
         #self.main_window.show()  # Muestra la ventana principal
-        with open('cpm.txt', 'w') as archivo:
+        with open('kldc.txt', 'w') as archivo:
             archivo.write("0")
         self.close()
-
-    
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

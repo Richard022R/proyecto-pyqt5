@@ -19,11 +19,12 @@ class ClickableLabel(QLabel):
 class Pantallaf(QMainWindow):
     
     closed = pyqtSignal()  # Señal emitida cuando se cierra la ventana
+    kldc_calculated = pyqtSignal(float)
 
     def __init__(self, main_window = None):
         super(Pantallaf, self).__init__()
         self.main_window = main_window
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/puntos.ui', self)
+        uic.loadUi('puntos.ui', self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
 
         # Connect signals
@@ -37,7 +38,7 @@ class Pantallaf(QMainWindow):
         if self.label_guardar is None:
             self.label_guardar = ClickableLabel(self)
             self.label_guardar.setObjectName('label_26')
-            self.label_guardar.setGeometry(490, 440, 161, 81)
+            self.label_guardar.setGeometry(610, 450, 161, 81)
             self.label_guardar.clicked.connect(self.show_cocomo)
         else:
             #self.label_info.setPixmap(self.label_info.pixmap())
@@ -105,7 +106,10 @@ class Pantallaf(QMainWindow):
         
         resultado = total * factor
         lineas_codigo = resultado
-        self.label_24.setText(f"{resultado:.2f}")  
+        resultado=resultado/1000
+        self.label_24.setText(f"{lineas_codigo:.2f}")
+        print('KLDC: ', resultado)
+        self.kldc_calculated.emit(resultado)
         return resultado
 
     def calcularcocomo(self, event):
@@ -119,8 +123,8 @@ class Pantallaf(QMainWindow):
     def show_cocomo(self):
         global lineas_codigo
         ldc = lineas_codigo
-        with open('kldc.txt', 'w') as archivo:
-            archivo.write(str(ldc))
+        #with open('kldc.txt', 'w') as archivo:
+        #    archivo.write(str(ldc))
         self.close()
     
     def closeEvent(self, event):
@@ -129,8 +133,8 @@ class Pantallaf(QMainWindow):
 
     def regresar(self, event):
         #self.main_window.show()  # Muestra la ventana principal
-        with open('kldc.txt', 'w') as archivo:
-            archivo.write("0")
+        #with open('kldc.txt', 'w') as archivo:
+        #    archivo.write("0")
         self.close()
 
 if __name__ == '__main__':

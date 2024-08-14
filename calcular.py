@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QLabel
@@ -17,7 +18,7 @@ contenido_global = None
 class ClickableLabel(QLabel):
     clicked = pyqtSignal()
 
-    def __init__(self, parent=None):
+    def ___init__(self, parent=None):
         super(ClickableLabel, self).__init__(parent)
 
     def mousePressEvent(self, event):
@@ -53,7 +54,7 @@ class COCOMOIWindow(QMainWindow):
     def __init__(self, main_window=None):
         super(COCOMOIWindow, self).__init__()
         self.main_window = main_window
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/cocomop.ui', self)
+        uic.loadUi('cocomop.ui', self)
 
         # Reemplazar el QLabel con la clase ClickableLabel
         self.label_c3 = self.findChild(ClickableLabel, 'label_24')
@@ -170,42 +171,36 @@ class COCOMOIWindow(QMainWindow):
     def show_info2(self):
         global contenido_global
         self.pantalla_puntosf = Pantallaf()
-        self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        #self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        self.pantalla_puntosf.kldc_calculated.connect(self.update_kldc)
         self.pantalla_puntosf.show()
-        with open('kldc.txt', 'r') as archivo:
-            contenido = archivo.read()
-            print('contenido: ', contenido)
-        contenido_global = contenido
-        self.lineEdit_2.setText(contenido)
+    
+    def update_kldc(self, kldc):
+        self.lineEdit_2.setText(str(kldc))
 
     def show_info3(self):
         global contenido_global
         self.pantalla_etapas = PantallaEtapas()
-        self.pantalla_etapas.closed.connect(self.actualizar_lineEdit_contenido2)
+        #self.pantalla_etapas.closed.connect(self.actualizar_lineEdit_contenido2)
+        self.pantalla_etapas.cpm_calculated.connect(self.update_cpm)
         self.pantalla_etapas.show()
-        with open('cpm.txt', 'r') as archivo:
-            contenido = archivo.read()
-            print('contenido: ', contenido)
-        contenido_global = contenido
-        self.lineEdit.setText(contenido)
+    
+    def update_cpm(self, cpm):
+        self.lineEdit.setText(str(cpm))
 
     def regresar(self, event):
         if self.main_window:
             self.main_window.show()  # Muestra la ventana principal si existe
-            with open('kldc.txt', 'w') as archivo:
-                archivo.write("0")
-            with open('cpm.txt', 'w') as archivo:
-                archivo.write("0")
         self.close()
 
     def actualizar_lineEdit_contenido(self):
         try:
-            with open('kldc.txt', 'r') as archivo:
+            with open('proyecto-pyqt5\dist\Software_Estimacion\_internal\kldc.txt', 'r') as archivo:
                 contenido = archivo.read()
                 print('Contenido leído: ', contenido)
             self.lineEdit_2.setText(contenido)
         except FileNotFoundError:
-            QMessageBox.warning(self, "Error", "No se encontró el archivo kldc.txt.")
+            QMessageBox.warning(self, "Error", "No se encontró el archivo proyecto-pyqt5\dist\Software_Estimacion\_internal\kldc.txt")
         except Exception as e:
             QMessageBox.warning(self, "Error", f"Ocurrió un error al leer el archivo: {e}")
     
@@ -223,7 +218,7 @@ class COCOMOIWindow(QMainWindow):
 class COCOMOIinfo(QMainWindow):
     def __init__(self, esfuerzo=None, tipo_proyecto=None, kldc=None, fec=None, tiempo=None, cpm=None, parent=None):
         super(COCOMOIinfo, self).__init__()
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/ecuaciones.ui', self)
+        uic.loadUi('ecuaciones.ui', self)
 
         self.resize(734, 684)
 

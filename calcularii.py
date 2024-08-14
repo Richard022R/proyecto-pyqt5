@@ -51,7 +51,7 @@ class Calcularw(QMainWindow):
     def __init__(self, main_window=None):
         super().__init__()
         self.main_window = main_window
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/cocopost.ui', self)
+        uic.loadUi('cocopost.ui', self)
 
         # Reemplazar el QLabel con la clase ClickableLabel
         self.label_info = self.findChild(ClickableLabel, 'label_4')
@@ -185,24 +185,32 @@ class Calcularw(QMainWindow):
     def show_info2(self):
         global contenido_global
         self.pantalla_puntosf = Pantallaf()
-        self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        #self.pantalla_puntosf.closed.connect(self.actualizar_lineEdit_contenido)
+        self.pantalla_puntosf.kldc_calculated.connect(self.update_kldc)
         self.pantalla_puntosf.show()
-        with open('kldc.txt', 'r') as archivo:
-            contenido = archivo.read()
-            print('contenido: ', contenido)
-        contenido_global = contenido
-        self.lineEdit_2.setText(contenido)
+        #with open('kldc.txt', 'r') as archivo:
+        #    contenido = archivo.read()
+        #    print('contenido: ', contenido)
+        #contenido_global = contenido
+        #self.lineEdit_2.setText(contenido)
     
+    def update_kldc(self, kldc):
+        self.lineEdit_2.setText(str(kldc))
+
     def show_info3(self):
         global contenido_global
         self.pantalla_etapas = PantallaEtapas()
-        self.pantalla_etapas.closed.connect(self.actualizar_lineEdit_contenido2)
+        #self.pantalla_etapas.closed.connect(self.actualizar_lineEdit_contenido2)
+        self.pantalla_etapas.cpm_calculated.connect(self.update_cpm)
         self.pantalla_etapas.show()
-        with open('cpm.txt', 'r') as archivo:
-            contenido = archivo.read()
-            print('contenido: ', contenido)
-        contenido_global = contenido
-        self.lineEdit.setText(contenido)
+        #with open('cpm.txt', 'r') as archivo:
+        #    contenido = archivo.read()
+        #    print('contenido: ', contenido)
+        #contenido_global = contenido
+        #self.lineEdit.setText(contenido)
+
+    def update_cpm(self, cpm):
+        self.lineEdit.setText(str(cpm))
 
     def actualizar_lineEdit_contenido(self):
         try:
@@ -229,7 +237,7 @@ class Calcularw(QMainWindow):
 class COCOMOIIinfo(QMainWindow):
     def __init__(self, esfuerzo=None, kldc=None, fec=None, tiempo=None, cpm=None, fac_escala=None, parent=None):
         super(COCOMOIIinfo, self).__init__()
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/ecuaciones_cocomo_ii.ui', self)
+        uic.loadUi('ecuaciones_cocomo_ii.ui', self)
 
         self.resize(734, 684)
 

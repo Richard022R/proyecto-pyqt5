@@ -17,11 +17,12 @@ class ClickableLabel(QLabel):
 class PantallaEtapas(QMainWindow):
     
     closed = pyqtSignal()  # Señal emitida cuando se cierra la ventana
+    cpm_calculated = pyqtSignal(float)  # Nueva señal para enviar el CPM calculado
 
     def __init__(self, main_window = None):
         super(PantallaEtapas, self).__init__()
         self.main_window = main_window
-        uic.loadUi('D:/cocomo/proyecto-pyqt5/etapas.ui', self)
+        uic.loadUi('etapas.ui', self)
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinimizeButtonHint)
 
         # Reemplazar el QLabel con la clase ClickableLabel
@@ -70,8 +71,7 @@ class PantallaEtapas(QMainWindow):
                    pruebas_cantidad * (programacion_porcentaje/100) +
                    lanzamiento_cantidad * (lanzamiento_porcentaje/100))
             print('CPM: ',cpm)
-            with open('cpm.txt', 'w') as archivo:
-                archivo.write(str(cpm))
+            self.cpm_calculated.emit(cpm)  # Emitir la señal con el valor calculado
             self.label_23.setText(f"<html><head/><body><p><span style=\" font-weight:500; color:#005500;\">CPM: {cpm:.2f}</span></p></body></html>")
         else:
             QMessageBox.warning(self, "Error", "Por favor, ingrese los porcentajes correctos, la suma de % debe ser 100%.")
@@ -87,8 +87,6 @@ class PantallaEtapas(QMainWindow):
 
     def regresar(self, event):
         #self.main_window.show()  # Muestra la ventana principal
-        with open('cpm.txt', 'w') as archivo:
-            archivo.write("0")
         self.close()
 
 if __name__ == '__main__':

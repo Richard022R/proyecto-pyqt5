@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>734</width>
-    <height>684</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -19,7 +19,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>200</x>
      <y>10</y>
      <width>231</width>
      <height>71</height>
@@ -1388,7 +1388,7 @@
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>510</y>
+     <y>540</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -1462,7 +1462,7 @@
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>580</y>
+     <y>610</y>
      <width>61</width>
      <height>61</height>
     </rect>
